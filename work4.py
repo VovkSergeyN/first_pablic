@@ -54,3 +54,6 @@ print(dir(pt2))
 print(pt2.__slots__)
 print(type(pt2))
 print(Point2D.__mro__)
+"\n1erwlekrjwlkrj" 
+"\n1erwlekrjwlkrj" 
+"1erwlekrjwlkrj" 
