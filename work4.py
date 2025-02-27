@@ -1,180 +1,55 @@
-# print("Hello world!!!")
-# date = '18.02.2025'
+class LinkedList:
+    def __init__(self):
+        self.head = None # ссылка на первый объект связного списка (если список пустой, то head = None);
+        self.tail = None # ссылка на последний объект связного списка (если список пустой, то tail = None)
+    def add_obj(self, obj): # добавление нового объекта obj класса ObjList в конец связного списка;
+        if self.head is None:
+            self.head = obj
+
+            self.tail = obj
+        else:
+            prev_obj = self.tail
+            self.tail = obj
+            self.tail.set_prev(prev_obj)
+            prev_obj.set_next(obj)
+    def remove_obj(self): # удаление последнего объекта из связного списка;
+        prev_obj = self.tail.get_prev()
+        if prev_obj is None:
+            self.head = None
+            self.tail = None
+        self.tail = prev_obj
+        self.tail.set_next(None)
+    def get_data(self): # получение списка из строк локального свойства __data всех объектов связного списка.
+        lst = []
+        current = self.head
+        while not (current is None):
+            lst.append(current.get_data())
+            current = current.get_next()
+        return lst
 
 
-# # x = 0
-# def outer():
-#     # global x
-#     x = 1
-#     def inner():
-#         nonlocal x
-#         x
-#     inner()
-#     print(x)
-#
-# print(outer())
-# from collections import namedtuple
-#
-# Car = namedtuple("Car_from_Germany", 'mark, age, firm')
-# bmw = Car("B2000", 2006, 'bmw')
-# bmw2 = bmw._replace(age=2007)
-# print(bmw._asdict())
-# print(bmw.mark, bmw.age, bmw.firm, sep="\n")
-# print(bmw2._asdict())
-#
-# class NegativeAgeError(Exception):
-#     pass
-# try:
-#     raise NegativeAgeError("Age can't be negative!!!")
-# except NegativeAgeError as e:
-#     print(e)
-#     print(dir(e))
-#     print(type(e))
-#     print(e.__traceback__)
-#     print(e.args)
 
-# class A():
-# class A:
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-#
-# a = A(1, 19)
-# print(a)
-# print(a.__dict__)
+class ObjList:
+    def __init__(self, data):
+        self.__next = None # ссылка на следующий объект связного списка (если следующего объекта нет, то __next = None);
+        self.__prev = None # ссылка на предыдущий объект связного списка (если предыдущего объекта нет, то __prev = None);
+        self.__data = data
+    def set_next(self, obj): # изменение приватного свойства __next на значение obj;
+        self.__next = obj
+    def set_prev(self, obj): # изменение приватного свойства __prev на значение obj;
+        self.__prev = obj
+    def get_next(self): # получение значения приватного свойства __next;
+        return self.__next
+    def get_prev(self): # получение значения приватного свойства __prev;
+        return self.__prev
+    def set_data(self, data): # изменение приватного свойства __data на значение data;
+        self.__data = data
+    def get_data(self): # получение значения приватного свойства __data.
+        return self.__data
 
-# ___________________________________________________________-
-# class Point2D:
-#     __slots__ = ("x", "y")
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-# pt2 = Point2D(10, 20)
-# print(pt2.x)
-# print(pt2.y)
-# print(dir(pt2))
-# print(pt2.__slots__)
-# print(type(pt2))
-# print(Point2D.__mro__)
-# ______________________________________________________________-
-# class attr_cls:
-#     def __init__(self, value, get_change="INIT"):
-#         self.value = value
-#         self.get_change = get_change
-
-    # def getattr(self, name):
-    #     return getattr(self.value, name)
-    #
-    # def repr(self):
-    #     return str(self.value)
-    #
-    # def bool(self):
-    #     return bool(self.value)
-    #
-    # def call(self):
-    #     return self.value()
-    #
-    # def eq(self, other):
-    #     return self.value == other
-    #
-    # def add(self, other):
-    #     return self.value + other
-    #
-    # def sub(self, other):
-    #     return self.value - other
-    #
-    # def mul(self, other):
-    #     return self.value * other
-    #
-    # def truediv(self, other):
-    #     return self.value / other
-    #
-    # def radd(self, other):
-    #     return other + self.value
-    #
-    # def rsub(self, other):
-    #     return other - self.value
-    #
-    # def rmul(self, other):
-    #     return other * self.value
-    #
-    # def rtruediv(self, other):
-    #     return other / self.value
-
-# a = attr_cls(10)
-# print(a.__dict__)
-#_____________________________________________________
-def change_detection(cls):
-    class attr_cls():
-        def init(self, value, get_change='INIT'):
-            self.value = value
-            self.get_change = get_change
-
-        def getattr(self, name):
-            return getattr(self.value, name)
-
-        def repr(self):
-            return str(self.value)
-
-        def bool(self):
-            return bool(self.value)
-
-        def call(self):
-            return self.value()
-
-        def eq(self, other):
-            return self.value == other
-
-        def add(self, other):
-            return self.value + other
-
-        def sub(self, other):
-            return self.value - other
-
-        def mul(self, other):
-            return self.value * other
-
-        def truediv(self, other):
-            return self.value / other
-
-        def radd(self, other):
-            return other + self.value
-
-        def rsub(self, other):
-            return other - self.value
-
-        def rmul(self, other):
-            return other * self.value
-
-        def rtruediv(self, other):
-            return other / self.value
-
-    def getattribute(self, name):
-        try:
-            attr = super(cls, self).getattribute(name)
-            if type(attr) != attr_cls:
-                new_attr = attr_cls(attr)
-                super(cls, self).setattr(name, new_attr)
-                return new_attr
-            return attr
-        except:
-            return attr_cls(None, '')
-
-    def setattr(self, name, value):
-        target = getattr(self, name, None)
-        if type(target) != attr_cls or not target.get_change:
-            super(cls, self).setattr(name, attr_cls(value))
-        elif target.value != value or type(target.value) != type(value):
-            target.value = value
-            target.get_change = 'MOD'
-
-    def delattr(self, name):
-        target = getattr(self, name)
-        target.value = None
-        target.get_change = 'DEL'
-
-    setattr(cls, 'setattr', setattr)
-    setattr(cls, 'getattribute', getattribute)
-    setattr(cls, 'delattr', delattr)
-
-    return cls
+lst = LinkedList()
+lst.add_obj(ObjList("данные 1"))
+lst.add_obj(ObjList("данные 2"))
+lst.add_obj(ObjList("данные 3"))
+res = lst.get_data()    # ['данные 1', 'данные 2', 'данные 3']
+print(res)
