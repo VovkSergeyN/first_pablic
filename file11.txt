@@ -1,1 +1,1 @@
-print("27.02.25") 
+win-hdk606c50iu\user
