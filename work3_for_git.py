@@ -82,33 +82,52 @@
 
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-class Shape:
-   def area(self):
-      pass
-class Rectangle(Shape):
-   def __init__(self, length, breadth):
-      self.length = length
-      self.breadth = breadth
-   def area(self):
-      return self.length * self.breadth
-class Circle(Shape):
-   def __init__(self, radius):
-      self.radius = radius
-   def area(self):
-      return 3.14 * self.radius * self.radius
-   def area(self, diameter):
-      self.radius = diameter / 2
-      return 3.14 * self.radius * self.radius
-r = Rectangle(5, 10)
-print("Area of rectangle:", r.area())
-c = Circle(7)
-print("Area of circle with radius 7:", c.area())
-print("Area of circle with diameter 10:", c.area(10))
+# class Shape:
+#    def area(self):
+#       pass
+# class Rectangle(Shape):
+#    def __init__(self, length, breadth):
+#       self.length = length
+#       self.breadth = breadth
+#    def area(self):
+#       return self.length * self.breadth
+# class Circle(Shape):
+#    def __init__(self, radius):
+#       self.radius = radius
+#    def area(self):
+#       return 3.14 * self.radius * self.radius
+#    def area(self, diameter):
+#       self.radius = diameter / 2
+#       return 3.14 * self.radius * self.radius
+# r = Rectangle(5, 10)
+# print("Area of rectangle:", r.area())
+# c = Circle(7)
+# print("Area of circle with radius 7:", c.area())
+# print("Area of circle with diameter 10:", c.area(10))
+#
+#
+# x = X()
+# x.sub_method(1)
+# print('Обратите внимание как происходит инициализация')
+# print('классов при указании аргументов в функции super()')
+# y = Y()
+# y.sub_method(5)
 
+class Thing:
+    def __init__(self, name: str, price: float, weight: float):
+        self.name = name
+        self.price = price
+        self.weight = weight
+    def __hash__(self):
+        return hash((self.name, self.price, self.weight))
 
-x = X()
-x.sub_method(1)
-print('Обратите внимание как происходит инициализация')
-print('классов при указании аргументов в функции super()')
-y = Y()
-y.sub_method(5)
+class DictShop(dict):
+    def __setitem__(self, key, value):
+        self.__check_value(value, Thing)
+        super().__setitem__(key, value)ц
+    @staticmethod
+    def __check_value(value, class_):
+        if not isinstance(value, class_):
+            raise TypeError(f'ключами могут быть только объекты класса {class_.__name__}')
+
+thing = Thing(name, price, weight)
