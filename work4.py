@@ -54,22 +54,36 @@
 # res = lst.get_data()    # ['данные 1', 'данные 2', 'данные 3']
 # print(res)
 
-class Counter:
-    def __init__(self, low, high):
-        self.low = low
-        self.high = high
-    def __iter__(self):
-        return self
-    def __next__(self):
-        if self.low > self.high:
-            raise StopIteration
-        else:
-            self.low += 1
-            return self.low - 1
+# class Counter:
+#     def __init__(self, low, high):
+#         self.low = low
+#         self.high = high
+#     def __iter__(self):
+#         return self
+#     def __next__(self):
+#         if self.low > self.high:
+#             raise StopIteration
+#         else:
+#             self.low += 1
+#             return self.low - 1
+#
+# c = Counter(3, 7)
+# for i in c:
+#     print(i)
+# i = iter(lambda: 1, 0)
+# for _ in range(20):
+#     print(next(i))
 
-c = Counter(3, 7)
-for i in c:
+def first():
+    yield 1
+    yield 2
+def second():
+    yield from first()
+    yield 100
+    yield 200
+print(type(secondit))
+gen = second()
+print(type(gen))
+
+for i in gen:
     print(i)
-i = iter(lambda: 1, 0)
-for _ in range(20):
-    print(next(i))
