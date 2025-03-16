@@ -81,9 +81,13 @@ def second():
     yield from first()
     yield 100
     yield 200
-print(type(secondit))
+
 gen = second()
 print(type(gen))
 
 for i in gen:
     print(i)
+
+from math import isclose
+
+print(isclose(0.1 + 0.1 + 0.1, 0.3))
